@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${title}">博客详情</title>
+    <link rel="shortcut icon" href="../static/image/index.jpg" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <!--typo-->
+    <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
+    <!--animate-->
+    <link rel="stylesheet" href="../static/css/animate.css" th:href="@{/css/animate.css}">
+    <!--prism-->
+    <link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}">
+    <!--tocbot-->
+    <link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+    <!--my-->
+    <link rel="stylesheet" href="../static/css/main.css" th:href="@{/css/main.css}">
+
+</head>
+<body>
+
+<!--导航-->
+<nav th:fragment="menu(n)" class="ui inverted attached segment m-padded-tb-mini m-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted stackable menu">
+            <h2 class="ui teal header secondary item">Blog</h2>
+            <a href="#" th:href="@{/}" class="m-item item m-mobile-hide" th:classappend="${n==1} ? 'active'"><i class="mini home icon"></i> <span>首页</span></a>
+            <a href="#" th:href="@{/types/-1}" class="m-item item m-mobile-hide" th:classappend="${n==2} ? 'active'"><i class="mini idea icon"></i>分类</a>
+            <a href="#" th:href="@{/tags/-1}" class="m-item item m-mobile-hide" th:classappend="${n==3} ? 'active'"><i class="mini tags icon"></i>标签</a>
+            <a href="#" th:href="@{/archives}" class="m-item item m-mobile-hide" th:classappend="${n==4} ? 'active'"><i class="mini clone icon"></i>归档</a>
+            <a href="#" th:href="@{/about}" class="m-item item m-mobile-hide" th:classappend="${n==5} ? 'active'"><i class="mini info icon"></i>关于我</a>
+            <div class="right item m-mobile-hide">
+                <form name="search" action="#" method="post" th:action="@{/search}" target="_blank">
+                    <div class="ui icon inverted transparent input">
+                        <input type="text" placeholder="Search..." name="query" th:value="${query}">
+                        <i onclick="document.forms['search'].submit()" class="search link icon"></i>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <a href="#" class="ui menu toggle black icon button m-right-top m-mobile-show">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--底部footer-->
+<footer th:fragment="footer" class="ui inverted vertical segment m-padded-tb-massive">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="ui inverted link list">
+                    <div class="item">
+                        <img src="../static/image/index.jpg" th:src="@{/image/index.jpg}" class="ui rounded image" alt="" style="width: 120px;">
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">最新博客</h4>
+                <div id="newblog-container">
+                    <div class="ui inverted link list" th:fragment="newblogList">
+                        <a href="#" class="item" th:each="blog : ${newblogs}" th:text="${blog.title}" th:href="@{/blog/{id}(id=${blog.id})}">用户故事（User Story）</a>
+                        <!--/*-->
+                        <a href="#" class="item">用户故事（User Story）</a>
+                        <a href="#" class="item">用户故事（User Story）</a>
+                        <!--*/-->
+                    </div>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-spaced">联系我</h4>
+                <div class="ui inverted link list">
+                    <a href="#" class="item" th:text="#{index.email}">Email：1424661628@qq.com</a>
+                    <a href="#" class="item">微信：lvmenghao170</a>
+                    <a href="#" class="item">Tel：1700000000</a>
+                </div>
+            </div>
+            <div class="seven wide column">
+                <h4 class="ui inverted header m-text-spaced">用户故事</h4>
+
+                <p>用户故事是敏捷框架中的一种开发方法。可以帮助开发者转换视角，以用户的角度更好的把握需求，从而实现具有商业价值的功能。</p>
+                <p>As a (role of user), I want (some feature) so that (some business value).</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-spaced m-opacity-tiny">© 2019 <a href="#">LMH</a>, All rights reserved.</p>
+    </div>
+</footer>
+
+<th:block th:fragment="script">
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/jquery.scrollto@2.1.2/jquery.scrollTo.min.js"></script>
+
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../static/lib/tocbot/tocbot.js" th:src="@{/lib/tocbot/tocbot.js}"></script>
+    <script src="../static/lib/qrcode/qrcode.js" th:src="@{/lib/qrcode/qrcode.js}"></script>
+    <script src="../static/lib/waypoints/jquery.waypoints.js" th:src="@{/lib/waypoints/jquery.waypoints.js}"></script>
+
+    <script>
+        // jquery的load()
+        $('#newblog-container').load(/*[[@{/footer/newblog}]]*/"/footer/newblog");
+    </script>
+
+</th:block>
+
+</body>
+</html>

@@ -1,0 +1,9 @@
+spring:
+  thymeleaf:
+    mode: HTML # 使用非严格模式
+  profiles:
+    active: dev # 指定后缀就可以
+  messages:
+    basename: i18n/messages
+
+comment.avatar: /image/avatar.jpg

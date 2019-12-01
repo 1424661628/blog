@@ -1,0 +1,20 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/blog?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: update # 数据库定义格式，更新同步表结构
+      use-new-id-generator-mappings: false #
+    show-sql: true
+
+logging:
+  level: # 配置logging.level.*来具体输出哪些包的日志级别
+    root: info
+    com.lmh: debug
+  file: log/blog-dev.log # 按照10M大小切分
+server:
+  port: 80
+
